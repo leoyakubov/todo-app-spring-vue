@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping ("/api/todo")
+@RequestMapping("/api/todo")
 public class TodoController {
         private final TodoService service;
 
@@ -16,7 +16,7 @@ public class TodoController {
             this.service = service;
         }
 
-    @GetMapping("/")
+    @GetMapping("")
     public List<Todo> getAll() {
             return service.findAll();
         }

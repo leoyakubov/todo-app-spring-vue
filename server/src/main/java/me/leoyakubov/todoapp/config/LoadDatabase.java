@@ -5,11 +5,13 @@ import me.leoyakubov.todoapp.model.Todo;
 import me.leoyakubov.todoapp.repository.TodoRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 import java.util.Random;
 import java.util.stream.Stream;
 
 @Slf4j
+@Configuration
 public class LoadDatabase {
 
     @Bean
@@ -20,7 +22,8 @@ public class LoadDatabase {
                 Todo todo = new Todo();
                 todo.setTitle(name);
                 todo.setCompleted(rd.nextBoolean());
-                log.info("Preloading " + repository.save(todo));
+                repository.save(todo);
+                log.info("Preloading " + todo);
             });
         };
     }
