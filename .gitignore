@@ -34,3 +34,9 @@ build/
 
 ### vue ###
 .env
+
+# General
+.DS_Store
+.AppleDouble
+.LSOverride
+
