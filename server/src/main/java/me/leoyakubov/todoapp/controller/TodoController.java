@@ -10,35 +10,35 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/todo")
 public class TodoController {
-        private final TodoService service;
+    private final TodoService service;
 
-        TodoController(TodoService service) {
-            this.service = service;
-        }
+    TodoController(TodoService service) {
+        this.service = service;
+    }
 
     @GetMapping("")
     public List<Todo> getAll() {
-            return service.findAll();
-        }
+        return service.findAll();
+    }
 
-        @PostMapping("")
-        public Todo create(@RequestBody Todo newTask) {
-            return service.save(newTask);
-        }
+    @PostMapping("")
+    public Todo create(@RequestBody Todo todo) {
+        return service.save(todo);
+    }
 
-        @GetMapping("/{id}")
-        public Todo getById(@PathVariable Long id) {
-            return service.findById(id)
-                    .orElseThrow(() -> new TodoNotFoundException(id));
-        }
+    @GetMapping("/{id}")
+    public Todo getById(@PathVariable Long id) {
+        return service.findById(id)
+                .orElseThrow(() -> new TodoNotFoundException(id));
+    }
 
-        @PutMapping("/{id}")
-        Todo update(@RequestBody Todo todo, @PathVariable Long id) {
-            return service.update(todo, id);
-        }
+    @PutMapping("/{id}")
+    Todo update(@RequestBody Todo todo, @PathVariable Long id) {
+        return service.update(todo, id);
+    }
 
-        @DeleteMapping("/{id}")
-        void delete(@PathVariable Long id) {
-            service.deleteById(id);
-        }
+    @DeleteMapping("/{id}")
+    void delete(@PathVariable Long id) {
+        service.deleteById(id);
+    }
 }

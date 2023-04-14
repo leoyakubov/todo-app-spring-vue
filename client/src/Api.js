@@ -9,7 +9,8 @@ const instance = axios.create({
 const createApi = (auth) => {
 
   instance.interceptors.request.use(async function (config) {
-    const accessToken = auth.getAccessToken()
+    const accessToken = await auth.getAccessTokenSilently();
+
     config.headers = {
       Authorization: `Bearer ${accessToken}`
     }
@@ -22,26 +23,26 @@ const createApi = (auth) => {
 
     // (C)reate
     createNew(text, completed) {
-      return instance.post('/todos', {title: text, completed: completed})
+      return instance.post('/api/todo', {title: text, completed: completed})
     },
 
     // (R)ead
     getAll() {
-      return instance.get('/todos', {
+      return instance.get('/api/todo', {
         transformResponse: [function (data) {
-          return data ? JSON.parse(data)._embedded.todos : data;
+          return data ? JSON.parse(data) : data;
         }]
       })
     },
 
     // (U)pdate
     updateForId(id, text, completed) {
-      return instance.put('todos/' + id, {title: text, completed: completed})
+      return instance.put('/api/todo/' + id, {title: text, completed: completed})
     },
 
     // (D)elete
     removeForId(id) {
-      return instance.delete('todos/' + id)
+      return instance.delete('/api/todo/' + id)
     }
   }
 }
